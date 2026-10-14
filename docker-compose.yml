@@ -1,0 +1,13 @@
+services:
+  backend:
+    build: ./backend
+    env_file: .env
+    ports: ["8050:8050"]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    volumes: ["postpilot-data:/srv/data"]
+  frontend:
+    build: ./frontend
+    ports: ["8090:80"]
+    depends_on: [backend]
+volumes:
+  postpilot-data:
